@@ -3,9 +3,9 @@
 <a href="https://travis-ci.com/mitsuhiko/systemfd"><img src="https://travis-ci.com/mitsuhiko/systemfd.svg?branch=master" alt=""></a>
 <a href="https://crates.io/crates/systemfd"><img src="https://img.shields.io/crates/v/systemfd.svg" alt=""></a>
 
-`systemfd` is the 1% of systemd that's useful for development.  It's a tiny process that
+`systemfd` is the 1% of systemd that's useful.  It's a tiny process that
 opens a bunch of sockets and passes them to another process so that that process can
-then restart itself without dropping connections.  For that it uses ths systemd socket
+then restart itself without dropping connections.  For that it uses the systemd socket
 passing protocol (`LISTEN_FDS` + `LISTEN_PID`) environment variables on macOS and Linux
 and a custom protocol on Windows.  Both are supported by the
 [listenfd](https://github.com/mitsuhiko/rust-listenfd) crate.
@@ -102,7 +102,7 @@ $ systemfd --no-pid -s http::5000 -- cargo watch -x run
 
 On windows passing of sockets is significantly more complex than on Unix.  To
 achieve this this utility implements a custom socket passing system that is also
-implemented by the listenfd crate.  When the sockets are crated an additional
+implemented by the listenfd crate.  When the sockets are created, an additional
 local RPC server is spawned that gives out duplicates of the socket to other
 processes.  The RPC server uses TCP and is communicated to the child with the
 `SYSTEMFD_SOCKET_SERVER` environment variable.  The RPC calls themselves are
